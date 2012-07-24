@@ -1,0 +1,11 @@
+<header class="page-title">
+  <h1>
+    <a href="{{ page.url }}">{{ page.title }}</a>
+    <small></small>
+  </h1>
+</header>
+<p class="byline muted">
+  <span><i class="icon-time"></i> {{ page.date | date: "%Y-%m-%d" }}</span>
+  <span><i class="icon-bookmark"></i> {{ page.categories }}</span>
+  <!-- <span><i class="icon-comments"></i> <a href="{{ page.url }}">Comments</a></span> -->
+</p>
