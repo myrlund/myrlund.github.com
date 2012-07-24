@@ -6,7 +6,7 @@ layout: default
   {% for page in site.posts %}
     <li class="post">
       {% include post_header.html %}
-      <p>{{ post.content }}</p>
+      <p>{{ page.content }}</p>
     </li>
   {% endfor %}
 </ol>
