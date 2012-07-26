@@ -1,12 +1,12 @@
 ---
+name: home
 layout: default
 ---
 
-<ol class="posts">
+<ol class="posts span8">
   {% for page in site.posts %}
-    <li class="post">
-      {% include post_header.html %}
-      <p>{{ page.content }}</p>
+    <li>
+      {% include post.html %}
     </li>
   {% endfor %}
 </ol>

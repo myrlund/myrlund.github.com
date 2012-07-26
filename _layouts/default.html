@@ -1,8 +1,7 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
   <head>
     <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="chrome=1">
     <title>{% if page.title %}{{ page.title }} · {% endif %}Jonas Myrlund</title>
     
     <link rel="stylesheet/less" href="/stylesheets/less/styles.less">
@@ -12,7 +11,7 @@
     
     <link rel="stylesheet" href="stylesheets/pygment_trac.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
-    <script src="javascripts/respond.js"></script>
+    <script src="javascripts/bootstrap-collapse.js"></script>
     <!--[if lt IE 9]>
       <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
@@ -22,22 +21,43 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
 
   </head>
-  <body>
-      <div id="header">
-        <nav>
-          <li class="fork"><a href="https://github.com/myrlund">View On GitHub</a></li>
+  <body class="{{ page.name }}">
+    
+    <header class="navbar navbar-fixed-top">
+      <div class="navbar-inner">
+        <nav class="container">
+          <!-- .btn-navbar is used as the toggle for collapsed navbar content -->
+          <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </a>
+          
+          <h1 class="brand">
+            <a href="/">Jonas Myrlund</a>
+            <small>and his mindless mind dumps</small>
+          </h1>
+          
+          <div class="nav-collapse">
+            <ul class="nav pull-right">
+              <li><a href="http://twitter.com/myrlund" class="">Follow me on Twitter</a></li>
+              <li><a href="https://github.com/myrlund" class="">My projects on GitHub &rarr;</a></li>
+            </ul>
+          </div>
         </nav>
-      </div><!-- end header -->
+      </div>
+    </header><!-- end header -->
 
-    <div class="wrapper">
-
-      <section>
-        <div id="title">
-          <h1>Myrlund</h1>
-          <p>...</p>
-        </div>
+    <div class="container">
+      
+      <section id="mainarea" class="row">
 
         {{content}}
+        
+        <aside class="author span4">
+          {% assign author = site.authors.myrlund %}
+          {% include author.html %}
+        </aside>
         
       </section>
 

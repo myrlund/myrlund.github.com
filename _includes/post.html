@@ -1,0 +1,15 @@
+{% assign author = site.authors[page.author] %}
+
+<article class="post">
+  {% include post_header.html %}
+
+  <div class="content">
+    {{ page.content | markdownify }}
+  </div>
+  
+  <p class="byline muted well">
+    <span><i class="icon-white icon-time"></i> {{ page.date | date: "%Y-%m-%d" }}</span>
+    <span><i class="icon-white icon-bookmark"></i> {{ page.categories }}</span>
+    <!-- <span><i class="icon-white icon-comment"></i> <a href="{{ page.url }}">Comments</a></span> -->
+  </p>
+</article>

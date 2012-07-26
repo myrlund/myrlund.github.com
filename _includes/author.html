@@ -1,0 +1,10 @@
+<div class="well">
+  <img src="http://www.gravatar.com/avatar/{{ author.gravatar }}.png" alt="{{ author.name }}" class="pull-right image">
+  <h3>{{ author.name }}</h3>
+  <dl class="dl">
+    {% if author.web %}<dt>Website</dt><dd><a href="{{ author.web }}">{{ author.web }}</a></dd>{% endif %}
+    {% if author.twitter %}<dt>Twitter</dt><dd><a href="http://twitter.com/{{ author.twitter }}">@{{ author.twitter }}</a></dd>{% endif %}
+    {% if author.github %}<dt>Github</dt><dd><a href="http://github.com/{{ author.github }}">{{ author.github }}</a></dd>{% endif %}
+  </dl>
+  {% if author.about %}{{ author.about | markdownify }}{% endif %}
+</div>
