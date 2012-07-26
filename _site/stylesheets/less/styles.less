@@ -1,0 +1,64 @@
+
+@import "bootstrap/bootstrap";
+
+h1, h2 {
+  a {
+    color: @headingsColor;
+  }
+}
+
+body {
+  padding-top: @navbarHeight + @navbarBottomBorderWidth;
+}
+
+#mainarea {
+  margin-top: @gridGutterWidth * 2;
+}
+
+ul, ol {
+  &.posts {
+    list-style-type: none;
+  }
+}
+
+.author .image {
+  margin: 0 0 10px 10px;
+}
+
+.brand small {
+  display: none;
+}
+
+.navbar .brand {
+  font-size: 30px;
+  
+  a {
+    color: @headingsColor;
+  }
+  
+  small {
+    display: inline;
+    margin-bottom: 0;
+  }
+}
+
+.post {
+  .byline {
+    margin-top: 1.5em;
+    
+    &.well {
+      padding: 6px 10px 5px;
+    }
+    span {
+      padding-right: 35px;
+    }
+  }
+  .content {
+    font-size: 1.1em;
+    margin-top: 1em;
+  }
+}
+
+// Modules
+
+@import "bootstrap/responsive";
