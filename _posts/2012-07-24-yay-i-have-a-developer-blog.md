@@ -17,7 +17,7 @@ fancy-pantsy HTML5 stuff like [WebSockets](http://www.html5rocks.com/en/tutorial
 and [localStorage](http://coding.smashingmagazine.com/2010/10/11/local-storage-and-how-to-use-it/), 
 [responsive designs](http://www.alistapart.com/articles/responsive-web-design/), 
 and perhaps mostly: _what happens if you try to smash them all together_. 
-There's also a fat chance I'll soon be spewing out some ramblings on some Ruby on Rails aspects I haven't seen too much of, like running multiple apps on a shared core backend using [the new Rails Engines introduced in Rails 3.1](http://guides.rubyonrails.org/engines.html).
+There's also a sizable chance I'll soon be spewing out some ramblings on some Ruby on Rails aspects I haven't seen too much of, like running multiple apps on a shared core backend using [the new Rails Engines introduced in Rails 3.1](http://guides.rubyonrails.org/engines.html).
 
 Should you come back later for some actual content? Yes, please do.
 
