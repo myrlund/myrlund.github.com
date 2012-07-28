@@ -88,13 +88,17 @@
 </ol>
 
 <p>The incoming messages we handled like so:</p>
-<div class='highlight'><pre><code class='javascript'><span class='kd'>var</span> <span class='nx'>numbers</span> <span class='o'>=</span> <span class='sr'>/(&quot;[^&quot;]*&quot;:\s*)(\d{15,})(\[,}])/g</span>
+<div class='highlight'><pre><code class='javascript'><span class='kd'>var</span> <span class='nx'>jsonString</span> <span class='o'>=</span> <span class='s1'>&#39;{&quot;foo&quot;: 123456789123456789, &quot;bar&quot;: 987654321987654321}&#39;</span>
+<span class='kd'>var</span> <span class='nx'>numbers</span> <span class='o'>=</span> <span class='sr'>/(&quot;[^&quot;]*&quot;:\s*)(\d{15,})(\[,}])/g</span>
 <span class='nx'>jsonString</span> <span class='o'>=</span> <span class='nx'>jsonString</span><span class='p'>.</span><span class='nx'>replace</span><span class='p'>(</span><span class='nx'>numbers</span><span class='p'>,</span> <span class='s2'>&quot;$1\&quot;$2\&quot;$3&quot;</span><span class='p'>)</span>
+<span class='nx'>jsonString</span> <span class='c1'>// =&gt; &#39;{&quot;foo&quot;: &quot;123456789123456789&quot;, &quot;bar&quot;: &quot;987654321987654321&quot;}&#39;</span>
 </code></pre>
 </div>
 <p>&#8230;and the outgoing messages we handled like so:</p>
-<div class='highlight'><pre><code class='javascript'><span class='kd'>var</span> <span class='nx'>stringifiedNumbers</span> <span class='o'>=</span> <span class='sr'>/(&quot;[^&quot;]*&quot;:\s*)&quot;(\d{15,})&quot;(\[,}])/g</span>
+<div class='highlight'><pre><code class='javascript'><span class='kd'>var</span> <span class='nx'>jsonString</span> <span class='o'>=</span> <span class='s1'>&#39;{&quot;foo&quot;: &quot;123456789123456789&quot;, &quot;bar&quot;: &quot;987654321987654321&quot;}&#39;</span>
+<span class='kd'>var</span> <span class='nx'>stringifiedNumbers</span> <span class='o'>=</span> <span class='sr'>/(&quot;[^&quot;]*&quot;:\s*)&quot;(\d{15,})&quot;(\[,}])/g</span>
 <span class='nx'>jsonString</span> <span class='o'>=</span> <span class='nx'>jsonString</span><span class='p'>.</span><span class='nx'>replace</span><span class='p'>(</span><span class='nx'>stringifiedNumbers</span><span class='p'>,</span> <span class='s2'>&quot;$1$2$3&quot;</span><span class='p'>)</span>
+<span class='nx'>jsonString</span> <span class='c1'>// =&gt; &#39;{&quot;foo&quot;: 123456789123456789, &quot;bar&quot;: 987654321987654321}&#39;</span>
 </code></pre>
 </div>
 <h3 id='the_moral_of_the_story'>The moral of the story&#8230;</h3>
