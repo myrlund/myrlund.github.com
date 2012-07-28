@@ -15,7 +15,7 @@ Anyways, back to the story. With the protocol well in production on other platfo
 
 Luckily, the encoded JSON strings arrive over web sockets as just that: strings. Problem is, the moment one tries to `JSON.parse(jsonString)` it's already too late -- information is lost.
 
-### Regex to the rescue
+## Regex to the rescue
 
 Our <del>temporary</del> solution consisted of three parts:
 
@@ -41,7 +41,7 @@ jsonString = jsonString.replace(stringifiedNumbers, "$1$2$3")
 jsonString // => '{"foo": 123456789123456789, "bar": 987654321987654321}'
 {% endhighlight %}
 
-### The moral of the story...
+## The moral of the story...
 
 1. Unless absolutely necessary, avoid using numeric ids if they can be expected to become very large.
 2. Regexes are awesome, although completely unreadable.

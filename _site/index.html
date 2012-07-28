@@ -78,7 +78,7 @@
 
 <p>Luckily, the encoded JSON strings arrive over web sockets as just that: strings. Problem is, the moment one tries to <code>JSON.parse(jsonString)</code> it&#8217;s already too late &#8211; information is lost.</p>
 
-<h3 id='regex_to_the_rescue'>Regex to the rescue</h3>
+<h2 id='regex_to_the_rescue'>Regex to the rescue</h2>
 
 <p>Our <del>temporary</del> solution consisted of three parts:</p>
 
@@ -104,7 +104,7 @@
 <span class='nx'>jsonString</span> <span class='c1'>// =&gt; &#39;{&quot;foo&quot;: 123456789123456789, &quot;bar&quot;: 987654321987654321}&#39;</span>
 </code></pre>
 </div>
-<h3 id='the_moral_of_the_story'>The moral of the story&#8230;</h3>
+<h2 id='the_moral_of_the_story'>The moral of the story&#8230;</h2>
 
 <ol>
 <li>Unless absolutely necessary, avoid using numeric ids if they can be expected to become very large.</li>
