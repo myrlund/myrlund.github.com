@@ -9,9 +9,9 @@
     
     <!-- <link rel="stylesheet" href="stylesheets/styles.min.css"> -->
     
-    <link rel="stylesheet" href="stylesheets/pygments.css">
+    <link rel="stylesheet" href="/stylesheets/pygments.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
-    <script src="javascripts/bootstrap-collapse.js"></script>
+    <script src="/javascripts/bootstrap-collapse.js"></script>
     <!--[if lt IE 9]>
       <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
@@ -87,13 +87,15 @@
 </ol>
 
 <p>The incoming messages we handled like so:</p>
-
-<p>{% highlight javascript %} var numbers = /(&#8221;<em>&#8221;:\s</em>)(\d{15,})([,}])/g jsonString = jsonString.replace(numbers, &#8220;$1&#34;$2&#34;$3&#8221;) {% endhighlight %}</p>
-
+<div class='highlight'><pre><code class='javascript'><span class='kd'>var</span> <span class='nx'>numbers</span> <span class='o'>=</span> <span class='sr'>/(&quot;[^&quot;]*&quot;:\s*)(\d{15,})(\[,}])/g</span>
+<span class='nx'>jsonString</span> <span class='o'>=</span> <span class='nx'>jsonString</span><span class='p'>.</span><span class='nx'>replace</span><span class='p'>(</span><span class='nx'>numbers</span><span class='p'>,</span> <span class='s2'>&quot;$1\&quot;$2\&quot;$3&quot;</span><span class='p'>)</span>
+</code></pre>
+</div>
 <p>&#8230;and the outgoing messages we handled like so:</p>
-
-<p>{% highlight javascript %} var stringifiedNumbers = /(&#8221;<em>&#8221;:\s</em>)&#8221;(\d{15,})&#8221;([,}])/g jsonString = jsonString.replace(stringifiedNumbers, &#8220;$1$2$3&#8221;) {% endhighlight %}</p>
-
+<div class='highlight'><pre><code class='javascript'><span class='kd'>var</span> <span class='nx'>stringifiedNumbers</span> <span class='o'>=</span> <span class='sr'>/(&quot;[^&quot;]*&quot;:\s*)&quot;(\d{15,})&quot;(\[,}])/g</span>
+<span class='nx'>jsonString</span> <span class='o'>=</span> <span class='nx'>jsonString</span><span class='p'>.</span><span class='nx'>replace</span><span class='p'>(</span><span class='nx'>stringifiedNumbers</span><span class='p'>,</span> <span class='s2'>&quot;$1$2$3&quot;</span><span class='p'>)</span>
+</code></pre>
+</div>
 <h3 id='the_moral_of_the_story'>The moral of the story&#8230;</h3>
 
 <ol>

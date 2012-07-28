@@ -5,6 +5,7 @@ layout: default
 
 <ol class="posts span8">
   {% for page in site.posts %}
+    {% assign content = page.content %}
     <li>
       {% include post.html %}
     </li>
