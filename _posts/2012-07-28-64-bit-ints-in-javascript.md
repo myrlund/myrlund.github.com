@@ -2,6 +2,7 @@
 title: 64-bit integers in Javascript
 layout: post
 categories: Javascript
+author: myrlund
 ---
 
 A couple of weeks ago, upon implementing a web socket protocol using JSON-encoded messages, we ran into quite the problem.
