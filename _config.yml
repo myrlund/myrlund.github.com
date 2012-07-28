@@ -1,5 +1,6 @@
 permalink: /:year/:month/:day/:title/
 pygments: true
+auto: true
 authors:
   myrlund:
     name: Jonas Myrlund
