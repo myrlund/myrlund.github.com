@@ -45,3 +45,5 @@ jsonString // => '{"foo": 123456789123456789, "bar": 987654321987654321}'
 
 1. Unless absolutely necessary, avoid using numeric ids if they can be expected to become very large.
 2. Regexes are awesome, although completely unreadable.
+
+### Do you have suggestions of better ways to handle this? Please let me know.
