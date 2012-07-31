@@ -27,7 +27,7 @@ The incoming messages we handled like so:
 
 {% highlight javascript %}
 var jsonString = '{"foo": 123456789123456789, "bar": 987654321987654321}'
-var numbers = /("[^"]*":\s*)(\d{15,})(\[,}])/g
+var numbers = /("[^"]*":\s*)(\d{15,})([,}])/g
 jsonString = jsonString.replace(numbers, "$1\"$2\"$3")
 jsonString // => '{"foo": "123456789123456789", "bar": "987654321987654321"}'
 {% endhighlight %}
@@ -36,7 +36,7 @@ jsonString // => '{"foo": "123456789123456789", "bar": "987654321987654321"}'
 
 {% highlight javascript %}
 var jsonString = '{"foo": "123456789123456789", "bar": "987654321987654321"}'
-var stringifiedNumbers = /("[^"]*":\s*)"(\d{15,})"(\[,}])/g
+var stringifiedNumbers = /("[^"]*":\s*)"(\d{15,})"([,}])/g
 jsonString = jsonString.replace(stringifiedNumbers, "$1$2$3")
 jsonString // => '{"foo": 123456789123456789, "bar": 987654321987654321}'
 {% endhighlight %}
