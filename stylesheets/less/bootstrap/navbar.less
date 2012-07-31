@@ -1,6 +1,15 @@
 // NAVBAR (FIXED AND STATIC)
 // -------------------------
 
+#navbar {
+  .padding(@elementHeight, @navbarHeight, @offset: 0) {
+    padding: ((@navbarHeight - @elementHeight) / 2 - @offset) 10px ((@navbarHeight - @elementHeight) / 2 + @offset);
+  }
+  .margin(@elementHeight, @navbarHeight, @offset: 0) {
+    margin: ((@navbarHeight - @elementHeight) / 2 - @offset) 10px ((@navbarHeight - @elementHeight) / 2 + @offset);
+  }
+}
+
 
 // COMMON STYLES
 // -------------
@@ -51,7 +60,7 @@
     display: block;
     // Vertically center the text given @navbarHeight
     @elementHeight: 35px;
-    padding: ((@navbarHeight - @elementHeight) / 2 - @navbarVerticalAlignmentDelta) 20px ((@navbarHeight - @elementHeight) / 2 + @navbarVerticalAlignmentDelta);
+    #navbar > .padding(@elementHeight, @navbarHeight, @navbarVerticalAlignmentDelta);
     margin: 0;
     margin-left: -20px; // negative indent to left-align the text down the page
     font-size: 20px;
@@ -208,7 +217,7 @@
   float: none;
   // Vertically center the text given @navbarHeight
   @elementHeight: 19px;
-  padding: ((@navbarHeight - @elementHeight) / 2 - @navbarVerticalAlignmentDelta + 3) 10px ((@navbarHeight - @elementHeight) / 2 + @navbarVerticalAlignmentDelta - 3);
+  #navbar > .padding(@elementHeight, @navbarHeight, -8);
   line-height: 19px;
   color: @navbarLinkColor;
   text-decoration: none;
@@ -220,14 +229,14 @@
   padding: 4px 10px 4px;
   // Vertically center the button given @navbarHeight
   @elementHeight: 28px;
-  margin: ((@navbarHeight - @elementHeight) / 2 - @navbarVerticalAlignmentDelta) 5px ((@navbarHeight - @elementHeight) / 2 - (@navbarVerticalAlignmentDelta - 1));
+  #navbar > .margin(@elementHeight, @navbarHeight, @navbarVerticalAlignmentDelta);
   line-height: @baseLineHeight;
 }
 .navbar .btn-group {
   margin: 0;
   // Vertically center the button given @navbarHeight
   @elementHeight: 28px;
-  padding: ((@navbarHeight - @elementHeight) / 2 - 1) 5px ((@navbarHeight - @elementHeight) / 2);
+  #navbar > .padding(@elementHeight, @navbarHeight);
 }
 // Hover
 .navbar .nav > li > a:hover {
@@ -364,3 +373,17 @@
     right: 13px;
   }
 }
+
+@media (max-width: 768px) {
+  @navbarHeightMobile: 20px;
+  .navbar .navbar-inner .brand {
+    #navbar > .padding(35px, @navbarHeightMobile);
+  }
+  .navbar .navbar-inner .nav > li > a {
+    #navbar > .padding(19px, @navbarHeightMobile);
+  }
+  .navbar .navbar-inner .btn-navbar {
+    #navbar > .margin(28px, @navbarHeightMobile);
+  }
+}
+
