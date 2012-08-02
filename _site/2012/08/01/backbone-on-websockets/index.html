@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <title>Jonas Myrlund</title>
+    <title>Backbone.js on WebSockets · Jonas Myrlund</title>
     
     <link rel="stylesheet/less" href="/stylesheets/less/styles.less">
     <script src="http://cdnjs.cloudflare.com/ajax/libs/less.js/1.3.0/less-1.3.0.min.js"></script>
@@ -34,7 +34,7 @@
 
 </script>
   </head>
-  <body class="home">
+  <body class="post">
     
     <header class="navbar navbar-fixed-top">
       <div class="navbar-inner">
@@ -65,11 +65,8 @@
       
       <section id="mainarea" class="row">
 
-        <ol class="posts span8">
+        <div class="single-post span8">
   
-    
-    <li>
-      
 
 <article class="post">
   <header class="post-title">
@@ -444,115 +441,26 @@
   </p>
 </article>
 
-    </li>
   
-    
-    <li>
-      
+  <section id="comments">
+    <div id="disqus_thread"></div>
+<script type="text/javascript">
+   /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+   var disqus_shortname = 'myrlund-github'; // required: replace example with your forum shortname
+   var disqus_title = 'Backbone.js on WebSockets';
+   //var disqus_url = 'http://myrlund.github.com/2012/08/01/backbone-on-websockets/';
 
-<article class="post">
-  <header class="post-title">
-  <h1>
-    <a href="/2012/07/28/64-bit-ints-in-javascript/">64-bit integers in Javascript</a>
-    <small>by Jonas Myrlund</small>
-  </h1>
-</header>
-
-
-  <div class="content">
-    <p>A couple of weeks ago, upon implementing a web socket protocol using JSON-encoded messages, we ran into quite the problem.</p>
-
-<p>Server side, various ids and generation numbers were stored as 64-bit integers. But alas, as it turns out, Javascript doesn&#8217;t support 64-bit integers&#8230; At all. It doesn&#8217;t even whine. Any number exceeding 9007199254740992 will silently be padded with zeros&#8230; No wonder we didn&#8217;t get the expected results in our interactions with the server.</p>
-
-<p><em>In case you&#8217;re one of those people: Javascript&#8217;s numbers are represented using 64-bit floating points with double precision, and hence the integers can&#8217;t exceed 2<sup>53</sup>. Consult the <a href='http://ecma262-5.com/ELS5_HTML.htm#Section_8.5'>ECMAscript language specification</a> for more information.</em></p>
-
-<p>Anyways, back to the story. With the protocol well in production on other platforms, it wasn&#8217;t likely to change, so <em>a hairy fix was needed</em>.</p>
-
-<p>Luckily, the encoded JSON strings arrive over web sockets as just that: strings. Problem is, the moment one tries to <code>JSON.parse(jsonString)</code> it&#8217;s already too late &#8211; information is lost.</p>
-
-<h2 id='regex_to_the_rescue'>Regex to the rescue</h2>
-
-<p>Our <del>temporary</del> solution consisted of three parts:</p>
-
-<ol>
-<li>running a simple regex over the incoming strings before parsing them</li>
-
-<li>running a similar regex over the outgoing strings after serializing them</li>
-
-<li>using string representations of the int64 fields internally</li>
-</ol>
-
-<p>The incoming messages we handled like so:</p>
-<div class='highlight'><pre><code class='javascript'><span class='kd'>var</span> <span class='nx'>jsonString</span> <span class='o'>=</span> <span class='s1'>&#39;{&quot;foo&quot;: 123456789123456789, &quot;bar&quot;: 987654321987654321}&#39;</span>
-<span class='kd'>var</span> <span class='nx'>numbers</span> <span class='o'>=</span> <span class='sr'>/(&quot;[^&quot;]*&quot;:\s*)(\d{15,})([,}])/g</span>
-<span class='nx'>jsonString</span> <span class='o'>=</span> <span class='nx'>jsonString</span><span class='p'>.</span><span class='nx'>replace</span><span class='p'>(</span><span class='nx'>numbers</span><span class='p'>,</span> <span class='s2'>&quot;$1\&quot;$2\&quot;$3&quot;</span><span class='p'>)</span>
-<span class='nx'>jsonString</span> <span class='c1'>// =&gt; &#39;{&quot;foo&quot;: &quot;123456789123456789&quot;, &quot;bar&quot;: &quot;987654321987654321&quot;}&#39;</span>
-</code></pre>
+   /* * * DON'T EDIT BELOW THIS LINE * * */
+   (function() {
+       var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+       dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+       (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+   })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+  </section>
 </div>
-<p>&#8230;and the outgoing messages we handled like so:</p>
-<div class='highlight'><pre><code class='javascript'><span class='kd'>var</span> <span class='nx'>jsonString</span> <span class='o'>=</span> <span class='s1'>&#39;{&quot;foo&quot;: &quot;123456789123456789&quot;, &quot;bar&quot;: &quot;987654321987654321&quot;}&#39;</span>
-<span class='kd'>var</span> <span class='nx'>stringifiedNumbers</span> <span class='o'>=</span> <span class='sr'>/(&quot;[^&quot;]*&quot;:\s*)&quot;(\d{15,})&quot;([,}])/g</span>
-<span class='nx'>jsonString</span> <span class='o'>=</span> <span class='nx'>jsonString</span><span class='p'>.</span><span class='nx'>replace</span><span class='p'>(</span><span class='nx'>stringifiedNumbers</span><span class='p'>,</span> <span class='s2'>&quot;$1$2$3&quot;</span><span class='p'>)</span>
-<span class='nx'>jsonString</span> <span class='c1'>// =&gt; &#39;{&quot;foo&quot;: 123456789123456789, &quot;bar&quot;: 987654321987654321}&#39;</span>
-</code></pre>
-</div>
-<h2 id='the_moral_of_the_story'>The moral of the story&#8230;</h2>
-
-<ol>
-<li>Unless absolutely necessary, avoid using numeric ids if they can be expected to become very large.</li>
-
-<li>Regexes are awesome, although completely unreadable.</li>
-</ol>
-
-<h3 id='do_you_have_suggestions_of_better_ways_to_handle_this_please_let_me_know'>Do you have suggestions of better ways to handle this? Please let me know.</h3>
-  </div>
-  
-  <p class="byline muted well">
-    <span><i class="icon-white icon-time"></i> 2012-07-28</span>
-    <span><i class="icon-white icon-bookmark"></i> Javascript</span>
-    <span><i class="icon-white icon-comment"></i> <a href="/2012/07/28/64-bit-ints-in-javascript/#disqus_thread">Comments</a></span>
-  </p>
-</article>
-
-    </li>
-  
-    
-    <li>
-      
-
-<article class="post">
-  <header class="post-title">
-  <h1>
-    <a href="/2012/07/24/yay-i-have-a-developer-blog/">Yay! I have a developer blog.</a>
-    <small>by Jonas Myrlund</small>
-  </h1>
-</header>
-
-
-  <div class="content">
-    <p>So, it has come to this. I&#8217;ve set up a blog &#8211; and a real one at that; not some Wordpress crap, but <a href='http://comoyo.github.com/blog/2012/06/11/how-comoyo-built-its-blog/'>authentic Jekyll-from-scratch, Git-powered awesomeness</a>.</p>
-
-<p>I&#8217;ve tried to keep blogs running before, but &#8211; as with most people &#8211; i ran out of topics to write about. Now, whether I actually ran out of topics to write about or I simply ran out of <em>knowledge</em>, I don&#8217;t really know.</p>
-
-<p>I think the problem might have been that I didn&#8217;t dig deep enough to well up something of interest to other people, but that&#8217;s (hopefully) slowly changing. Even though I&#8217;m nowhere near a virtuoso in any of my day-to-day work, I think I might have something to contribute to the interwebs this time around. At least more than before.</p>
-
-<p>The first posts will most likely revolve around the concoction of technologies I&#8217;ve been spending time with this summer, namely backend-less <a href='http://backbonejs.org/'>Backbone</a>-driven Javascript, fancy-pantsy HTML5 stuff like <a href='http://www.html5rocks.com/en/tutorials/websockets/basics/'>WebSockets</a> and <a href='http://coding.smashingmagazine.com/2010/10/11/local-storage-and-how-to-use-it/'>localStorage</a>, <a href='http://www.alistapart.com/articles/responsive-web-design/'>responsive designs</a>, and perhaps mostly: <em>what happens if you try to smash them all together</em>. There&#8217;s also a sizable chance I&#8217;ll soon be spewing out some ramblings on some unusual Ruby on Rails stuff, like running multiple apps on a shared core backend using <a href='http://guides.rubyonrails.org/engines.html'>the new Rails Engines introduced in Rails 3.1</a>.</p>
-
-<p>Anyways&#8230; So, should you come back later for some actual content? Yes, please do.</p>
-
-<p><em>Stay classy, internet.</em></p>
-  </div>
-  
-  <p class="byline muted well">
-    <span><i class="icon-white icon-time"></i> 2012-07-24</span>
-    <span><i class="icon-white icon-bookmark"></i> Meta</span>
-    <span><i class="icon-white icon-comment"></i> <a href="/2012/07/24/yay-i-have-a-developer-blog/#disqus_thread">Comments</a></span>
-  </p>
-</article>
-
-    </li>
-  
-</ol>
 
         
         <aside class="author span4">
