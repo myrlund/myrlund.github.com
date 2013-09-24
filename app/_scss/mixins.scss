@@ -1,0 +1,27 @@
+
+@mixin clearfix {
+    // For modern browsers
+    &:before,
+    &:after {
+        content:" ";
+        display:table;
+    }
+
+    &:after {
+        clear:both;
+    }
+
+    // For IE 6/7 (trigger hasLayout)
+    & {
+        *zoom:1;
+    }
+}
+
+
+@mixin gradient($from, $to) {
+  background-color: $from;
+  background-image: -moz-linear-gradient($from, $to);
+  background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, from($from), to($to));
+  background-image: -webkit-linear-gradient($from, $to);
+  background-image: -o-linear-gradient($from, $to);
+}

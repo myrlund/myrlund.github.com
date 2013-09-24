@@ -1,0 +1,13 @@
+---
+layout: default
+title: Words in a cloud
+---
+
+<div id="home">
+  <ul class="posts">
+    {% for post in site.posts %}
+      {% assign content = post.content %}
+      {% include post.html %}
+    {% endfor %}
+  </ul>
+</div>
